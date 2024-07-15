@@ -1,19 +1,12 @@
 import axios from 'axios';
 const API = process.env.REACT_APP_API_URL;
 
-class AuthService {
-
-    async LoginService(data) {
-        await axios.get(API + '/login').then((res) => {
-            console.log(res);
-        })
-    }
-
-    async RegisterService(data) {
-        console.log('register - ', data)
-    }
-
+export async function LoginService(data) {
+    await axios.get(API + '/login').then((res) => {
+        console.log(res);
+    })
 }
 
-
-export default new AuthService();
+export async function RegisterService(data) {
+    console.log('register - ', data)
+}

@@ -4,7 +4,7 @@ import '../css/Login.css';
 import Button from "../Components/Button";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import AuthService from "../Service/AuthService";
+import { LoginService, RegisterService } from "../Service/AuthService";
 import ForgotPassword from "./ForgotPassword";
 
 
@@ -26,7 +26,7 @@ const Login = () => {
         e.preventDefault();
         const postData = { email, pass }
 
-        const res = await AuthService.LoginService(postData);
+        const res = await LoginService(postData);
         console.log(res);
     }
 
@@ -34,7 +34,7 @@ const Login = () => {
         e.preventDefault();
         const postData = { name, email, pass, repass }
 
-        const res = await AuthService.RegisterService(postData);
+        const res = await RegisterService(postData);
         console.log(res);
     }
 
