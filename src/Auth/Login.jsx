@@ -4,7 +4,7 @@ import '../css/Login.css';
 import Button from "../Components/Button";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import { LoginService, RegisterService } from "../Service/AuthService";
+import { RegisterService } from "../Service/AuthService";
 import ForgotPassword from "./ForgotPassword";
 
 
@@ -21,14 +21,6 @@ const Login = () => {
     useEffect(() => {
         //
     }, [])
-
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const postData = { email, pass }
-
-        const res = await LoginService(postData);
-        console.log(res);
-    }
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -79,15 +71,10 @@ const Login = () => {
                             </span>
                         </div>
                         { isLogin && <LoginForm
-                                handleLogin={handleLogin}
                                 FaUser={FaUser}
                                 FaUnlock={FaUnlock}
                                 FaGoogle={FaGoogle}
                                 Button={Button}
-                                email={email}
-                                setEmail={setEmail}
-                                pass={pass}
-                                setPass={setPass}
                                 handleForgotPass={handleForgotPass}
                             />
                         }

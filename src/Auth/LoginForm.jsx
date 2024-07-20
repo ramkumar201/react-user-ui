@@ -1,9 +1,10 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Input from "../Components/Input"
+import { checkEmail } from "../helper/Validate";
+import { LoginService } from "../Service/AuthService";
 
 const LoginForm = ({
-    handleLogin, FaUser, FaUnlock, FaGoogle, Button, setEmail, setPass, handleForgotPass,
-    email, pass
+    FaUser, FaUnlock, FaGoogle, Button, handleForgotPass
 }) => {
 
 
@@ -11,35 +12,76 @@ const LoginForm = ({
         //
     },  [])
 
+    const [formData, setFormData] = useState({
+        useremail: '',
+        password: '',
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const validate = async () => {
+        let tempErrors = {};
+
+        if (! formData.useremail) {
+            tempErrors.useremail = "Email is required";
+        } else if (await checkEmail(formData.useremail)) {
+            tempErrors.useremail = "Email is invalid";
+        }
+        if (! formData.password) {
+            tempErrors.password = "Password is required";
+        }
+        setErrors(tempErrors);
+        return Object.keys(tempErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if(validate()) {
+            console.log('Form Data --- ', formData);
+            const res = await LoginService(formData);
+            console.log(res);
+        }
+    }
+
     return (
         <>
             <div className="signin-form">
                 <h2 className="form-title">Sign In</h2>
-                <form className="register-form" id="login-form" onSubmit={handleLogin}>
+                <form className="register-form" id="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="useremail"><FaUser /></label>
                         <Input
-                            required={true}
-                            type="email"
+                            required={false}
+                            type="text"
                             name="useremail"
                             id="useremail"
-                            placeholder="User Name *"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email *"
+                            value={formData.useremail}
+                            onChange={handleChange}
                         />
+                        {errors.useremail && <span>{errors.useremail}</span>}
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password"><FaUnlock /></label>
                         <Input
-                            required={true}
+                            required={false}
                             type="password"
                             name="password"
                             id="password"
                             placeholder="Password *"
-                            value={pass}
-                            onChange={(e) => setPass(e.target.value)}
+                            value={formData.password}
+                            onChange={handleChange}
                         />
+                        {errors.password && <span>{errors.password}</span>}
                     </div>
 
                     <div className="form-group">
