@@ -8,11 +8,6 @@ const RegisterForm = ({
     FaUser, FaUnlock, FaGoogle, Button
 }) => {
 
-    useEffect(() => {
-        //
-    }, [])
-
-
     const [formData, setFormData] = useState({
         name: '',
         useremail: '',
@@ -68,6 +63,10 @@ const RegisterForm = ({
         }
     }
 
+    useEffect(() => {
+        //
+    }, [])
+
 
     return (
         <div className="signin-form">
@@ -82,9 +81,10 @@ const RegisterForm = ({
                         placeholder="Name *"
                         value={formData.name}
                         onChange={handleChange}
+                        className={`${errors.name && 'error-input'}`}
                     />
-                    {errors.name && <span className="error-msg">{errors.name}</span>}
                 </div>
+                {errors.name && <span className="error-msg">{errors.name}</span>}
 
                 <div className="form-group">
                     <label htmlFor="useremail"><IoMdMail /></label>
@@ -95,9 +95,10 @@ const RegisterForm = ({
                        placeholder="Email *"
                        value={formData.useremail}
                        onChange={handleChange}
+                       className={`${errors.useremail && 'error-input'}`}
                     />
-                    {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
                 </div>
+                {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
 
                 <div className="form-group">
                     <label htmlFor="password"><FaUnlock /></label>
@@ -108,9 +109,10 @@ const RegisterForm = ({
                        placeholder="Password *"
                        value={formData.password}
                        onChange={handleChange}
+                       className={`${errors.password && 'error-input'}`}
                     />
-                    {errors.password && <span className="error-msg">{errors.password}</span>}
                 </div>
+                {errors.password && <span className="error-msg">{errors.password}</span>}
 
                 <div className="form-group">
                     <label htmlFor="confirmpassword"><FaUnlock /></label>
@@ -121,9 +123,10 @@ const RegisterForm = ({
                        placeholder="Confirm password *"
                        value={formData.confirmpassword}
                        onChange={handleChange}
+                       className={`${errors.confirmpassword && 'error-input'}`}
                     />
-                    {errors.confirmpassword && <span className="error-msg">{errors.confirmpassword}</span>}
                 </div>
+                {errors.confirmpassword && <span className="error-msg">{errors.confirmpassword}</span>}
 
                 <div className="form-group form-button">
                     <Button name="Sign Up"/>

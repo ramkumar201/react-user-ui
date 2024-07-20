@@ -64,10 +64,11 @@ const LoginForm = ({
                             id="useremail"
                             placeholder="Email *"
                             value={formData.useremail}
+                            className={`${errors.useremail && 'error-input'}`}
                             onChange={handleChange}
                         />
-                        {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
                     </div>
+                    {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
 
                     <div className="form-group">
                         <label htmlFor="password"><FaUnlock /></label>
@@ -77,10 +78,11 @@ const LoginForm = ({
                             id="password"
                             placeholder="Password *"
                             value={formData.password}
+                            className={`${errors.password && 'error-input'}`}
                             onChange={handleChange}
                         />
-                        {errors.password && <span className="error-msg">{errors.password}</span>}
                     </div>
+                    {errors.password && <span className="error-msg">{errors.password}</span>}
 
                     <div className="form-group">
                         <span
