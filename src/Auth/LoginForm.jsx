@@ -44,7 +44,7 @@ const LoginForm = ({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(validate()) {
+        if(await validate()) {
             console.log('Form Data --- ', formData);
             const res = await LoginService(formData);
             console.log(res);
@@ -59,7 +59,6 @@ const LoginForm = ({
                     <div className="form-group">
                         <label htmlFor="useremail"><FaUser /></label>
                         <Input
-                            required={false}
                             type="text"
                             name="useremail"
                             id="useremail"
@@ -67,13 +66,12 @@ const LoginForm = ({
                             value={formData.useremail}
                             onChange={handleChange}
                         />
-                        {errors.useremail && <span>{errors.useremail}</span>}
+                        {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password"><FaUnlock /></label>
                         <Input
-                            required={false}
                             type="password"
                             name="password"
                             id="password"
@@ -81,7 +79,7 @@ const LoginForm = ({
                             value={formData.password}
                             onChange={handleChange}
                         />
-                        {errors.password && <span>{errors.password}</span>}
+                        {errors.password && <span className="error-msg">{errors.password}</span>}
                     </div>
 
                     <div className="form-group">

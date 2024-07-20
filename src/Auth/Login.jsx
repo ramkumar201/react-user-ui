@@ -4,16 +4,11 @@ import '../css/Login.css';
 import Button from "../Components/Button";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import { RegisterService } from "../Service/AuthService";
 import ForgotPassword from "./ForgotPassword";
 
 
 const Login = () => {
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [pass, setPass] = useState('')
-    const [repass, setRePass] = useState('')
     const [isLogin, setisLogin] = useState(true)
     const [isReg, setisReg] = useState(false)
     const [isForgot, setisForget] = useState(false)
@@ -22,15 +17,7 @@ const Login = () => {
         //
     }, [])
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        const postData = { name, email, pass, repass }
-
-        const res = await RegisterService(postData);
-        console.log(res);
-    }
-
-    const handleForgotPass = (e) => {
+    const handleForgotPass = () => {
         handleChangeCom('forgot')
     }
 
@@ -79,19 +66,10 @@ const Login = () => {
                             />
                         }
                         { isReg && <RegisterForm
-                                handleRegister={handleRegister}
                                 FaUser={FaUser}
                                 FaUnlock={FaUnlock}
                                 FaGoogle={FaGoogle}
                                 Button={Button}
-                                name={name}
-                                setName={setName}
-                                email={email}
-                                setEmail={setEmail}
-                                pass={pass}
-                                setPass={setPass}
-                                repass={repass}
-                                setRePass={setRePass}
                             />
                         }
                         { isForgot && <ForgotPassword 
