@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Input from "../Components/Input"
 import { checkEmail } from "../helper/Validate";
 import { LoginService } from "../Service/AuthService";
+import toast from "react-hot-toast";
 
 const LoginForm = ({
     FaUser, FaUnlock, FaGoogle, Button, handleForgotPass
@@ -13,7 +14,7 @@ const LoginForm = ({
     },  [])
 
     const [formData, setFormData] = useState({
-        useremail: '',
+        email: '',
         password: '',
     });
 
@@ -30,10 +31,10 @@ const LoginForm = ({
     const validate = async () => {
         let tempErrors = {};
 
-        if (! formData.useremail) {
-            tempErrors.useremail = "Email is required";
-        } else if (await checkEmail(formData.useremail)) {
-            tempErrors.useremail = "Email is invalid";
+        if (! formData.email) {
+            tempErrors.email = "Email is required";
+        } else if (await checkEmail(formData.email)) {
+            tempErrors.email = "Email is invalid";
         }
         if (! formData.password) {
             tempErrors.password = "Password is required";
@@ -45,9 +46,14 @@ const LoginForm = ({
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(await validate()) {
-            console.log('Form Data --- ', formData);
-            const res = await LoginService(formData);
-            console.log(res);
+            await LoginService(formData).then((res) => {
+                console.log('Login Return -- ', res);
+                if (res.code === "ERR_BAD_REQUEST") {
+                    toast.error(res.response.data.message)
+                } else if (res.status) {
+                    toast.success(res.data.message)
+                }
+            });
         }
     }
 
@@ -57,18 +63,18 @@ const LoginForm = ({
                 <h2 className="form-title">Sign In</h2>
                 <form className="register-form" id="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="useremail"><FaUser /></label>
+                        <label htmlFor="email"><FaUser /></label>
                         <Input
                             type="text"
-                            name="useremail"
-                            id="useremail"
+                            name="email"
+                            id="email"
                             placeholder="Email *"
-                            value={formData.useremail}
-                            className={`${errors.useremail && 'error-input'}`}
+                            value={formData.email}
+                            className={`${errors.email && 'error-input'}`}
                             onChange={handleChange}
                         />
                     </div>
-                    {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
+                    {errors.email && <span className="error-msg">{errors.email}</span>}
 
                     <div className="form-group">
                         <label htmlFor="password"><FaUnlock /></label>

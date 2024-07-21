@@ -5,6 +5,7 @@ import Button from "../Components/Button";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ForgotPassword from "./ForgotPassword";
+import { Toaster } from "react-hot-toast";
 
 
 const Login = () => {
@@ -39,6 +40,7 @@ const Login = () => {
 
     return (
         <>
+            <Toaster />
             <section className="sign-in">
                 <div className="container">
                     <div className="signin-content">

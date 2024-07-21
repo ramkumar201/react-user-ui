@@ -12,12 +12,12 @@ const ForgotPassword = ({ Button }) => {
                 </p>
                 <form className="register-form" id="login-form">
                     <div className="form-group">
-                        <label htmlFor="useremail"><IoMdMail /></label>
+                        <label htmlFor="email"><IoMdMail /></label>
                         <input
                             required
                             type="email"
-                            name="useremail"
-                            id="useremail"
+                            name="email"
+                            id="email"
                             placeholder="Email *"
                         />
                     </div>

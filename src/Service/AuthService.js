@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios from './index';
 const API = process.env.REACT_APP_API_URL;
 
 export async function LoginService(data) {
-    await axios.get(API + '/login').then((res) => {
-        console.log(res);
-    })
+    const res = axios().post(API + '/login', data);
+    return res;
 }
 
 export async function RegisterService(data) {
-    console.log('register - ', data)
+    const res = await axios().post(API + '/register', data);
+    return res;
 }

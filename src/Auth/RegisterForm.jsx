@@ -3,14 +3,15 @@ import { IoMdMail } from "react-icons/io";
 import { checkEmail } from "../helper/Validate";
 import { RegisterService } from "../Service/AuthService";
 import Input from "../Components/Input";
-
+import toast from "react-hot-toast";
 const RegisterForm = ({
     FaUser, FaUnlock, FaGoogle, Button
 }) => {
 
     const [formData, setFormData] = useState({
-        name: '',
-        useremail: '',
+        firstName: '',
+        lastName: '',
+        email: '',
         password: '',
         confirmpassword: '',
     });
@@ -28,14 +29,17 @@ const RegisterForm = ({
     const validate = async () => {
         let tempErrors = {};
 
-        if (!formData.name) {
-            tempErrors.name = "Name is required";
+        if (!formData.firstName) {
+            tempErrors.firstName = "First name is required";
+        }
+        if (!formData.lastName) {
+            tempErrors.lastName = "Last name is required";
         }
 
-        if (!formData.useremail) {
-            tempErrors.useremail = "Email is required";
-        } else if (await checkEmail(formData.useremail)) {
-            tempErrors.useremail = "Email is invalid";
+        if (!formData.email) {
+            tempErrors.email = "Email is required";
+        } else if (await checkEmail(formData.email)) {
+            tempErrors.email = "Email is invalid";
         }
 
         if (!formData.password) {
@@ -57,9 +61,14 @@ const RegisterForm = ({
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (await validate()) {
-            console.log(' Form Data -- ', formData)
-            const res = await RegisterService(formData);
-            console.log(res);
+            await RegisterService(formData).then((res) => {
+                console.log(res.response);
+                if (res.code === "ERR_BAD_REQUEST") {
+                    toast.error(res.response.data.message)
+                } else if (res.status) {
+                    toast.success(res.data.message)
+                }
+            });
         }
     }
 
@@ -73,32 +82,46 @@ const RegisterForm = ({
             <h2 className="form-title">Sign Up</h2>
             <form className="register-form" id="login-form" onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name"><FaUser /></label>
+                    <label htmlFor="firstName"><FaUser /></label>
                     <Input
                         type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Name *"
-                        value={formData.name}
+                        name="firstName"
+                        id="firstName"
+                        placeholder="First Name *"
+                        value={formData.firstName}
                         onChange={handleChange}
-                        className={`${errors.name && 'error-input'}`}
+                        className={`${errors.firstName && 'error-input'}`}
                     />
                 </div>
-                {errors.name && <span className="error-msg">{errors.name}</span>}
+                {errors.firstName && <span className="error-msg">{errors.firstName}</span>}
 
                 <div className="form-group">
-                    <label htmlFor="useremail"><IoMdMail /></label>
+                    <label htmlFor="lastName"><FaUser /></label>
                     <Input
-                       type="text"
-                       name="useremail"
-                       id="useremail"
-                       placeholder="Email *"
-                       value={formData.useremail}
-                       onChange={handleChange}
-                       className={`${errors.useremail && 'error-input'}`}
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        placeholder="Last Name *"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className={`${errors.lastName && 'error-input'}`}
                     />
                 </div>
-                {errors.useremail && <span className="error-msg">{errors.useremail}</span>}
+                {errors.lastName && <span className="error-msg">{errors.lastName}</span>}
+
+                <div className="form-group">
+                    <label htmlFor="email"><IoMdMail /></label>
+                    <Input
+                       type="text"
+                       name="email"
+                       id="email"
+                       placeholder="Email *"
+                       value={formData.email}
+                       onChange={handleChange}
+                       className={`${errors.email && 'error-input'}`}
+                    />
+                </div>
+                {errors.email && <span className="error-msg">{errors.email}</span>}
 
                 <div className="form-group">
                     <label htmlFor="password"><FaUnlock /></label>
