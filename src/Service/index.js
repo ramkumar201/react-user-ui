@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default () => {
+const createAxiosInstance = () => {
     const optionValue = {
         "baseURL": '/',
         "headers": {
@@ -21,3 +21,4 @@ export default () => {
     return instance;
 
 }
+export default createAxiosInstance
