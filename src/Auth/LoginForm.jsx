@@ -3,6 +3,8 @@ import Input from "../Components/Input"
 import { checkEmail } from "../helper/Validate";
 import { LoginService } from "../Service/AuthService";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 
 const LoginForm = ({
     FaUser, FaUnlock, FaGoogle, Button, handleForgotPass
@@ -19,6 +21,8 @@ const LoginForm = ({
     });
 
     const [errors, setErrors] = useState({});
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,6 +56,9 @@ const LoginForm = ({
                     toast.error(res.response.data.message)
                 } else if (res.status) {
                     toast.success(res.data.message)
+                    setTimeout(() => {
+                        navigate('/')
+                    }, 2000)
                 }
             });
         }
