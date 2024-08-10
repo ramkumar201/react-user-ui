@@ -24,7 +24,7 @@ const LoginForm = () => {
             console.log('-- User have already Logged In --');
             navigate('/');
         }
-    }, [])
+    }, [user, navigate])
 
     const [formData, setFormData] = useState({
         email: '',
