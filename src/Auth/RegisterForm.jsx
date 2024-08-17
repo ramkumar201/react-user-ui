@@ -9,6 +9,7 @@ import Button from "../Components/Button";
 import LoginLayout from "../Components/layouts/LoginLayout";
 import '../css/Login.css';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hook/useAuth";
 
 
 const RegisterForm = () => {
@@ -24,6 +25,14 @@ const RegisterForm = () => {
     const [errors, setErrors] = useState({});
 
     const navigate = useNavigate();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user) {
+            console.log('-- User have already Logged In --');
+            navigate('/')
+        }
+    }, [user, navigate])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -81,10 +90,6 @@ const RegisterForm = () => {
             });
         }
     }
-
-    useEffect(() => {
-        //
-    }, [])
 
 
     return (

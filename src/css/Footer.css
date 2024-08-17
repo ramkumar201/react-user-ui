@@ -3,7 +3,7 @@
     text-align: center;
 }
 
-.footer .row {
+.footer .frow {
     width: 100%;
     margin: 1% 0%;
     color: gray;
@@ -11,17 +11,17 @@
     font-weight: 450;
 }
 
-.footer .row a {
+.footer .frow a {
     text-decoration: none;
     color: gray;
     transition: 0.5s;
 }
 
-.footer .row a:hover {
+.footer .frow a:hover {
     color: #fff;
 }
 
-.footer .row a i {
+.footer .frow a i {
     font-size: 2em;
     margin: 0% 1%;
 }

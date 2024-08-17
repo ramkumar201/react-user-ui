@@ -5,7 +5,7 @@ const Footer = () => {
         <>
             <footer>
                 <div className="footer">
-                    <div className="row">
+                    <div className="frow">
                         Copyright &copy; { new Date().getFullYear() } - All rights reserved || Designed By: Ramkumar 
                     </div>
                 </div>
