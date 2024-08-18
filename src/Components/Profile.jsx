@@ -24,7 +24,10 @@ const Profile = () => {
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
-    phone: user.phone ?? "",
+    phone: user.phone ? "+" + user.phone.toString() : "",
+    image: user.image
+      ? user.image
+      : "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
   });
 
   const GetUserInfo = useCallback(async () => {
@@ -39,6 +42,7 @@ const Profile = () => {
           lastName: data.lastName,
           email: data.email,
           phone: data.phone ? "+" + data.phone.toString() : "",
+          image: data.image,
         });
       }
     });
@@ -95,7 +99,7 @@ const Profile = () => {
                 <div className="mt-6 profile-img">
                   <img
                     className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                    src={formData.image}
                     alt={user.firstName.toLowerCase() + "_img"}
                   />
                 </div>
