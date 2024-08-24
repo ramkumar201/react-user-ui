@@ -28,7 +28,17 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
-      }
+      },
+      width: {
+        '300': '300px',
+        '2px': '2px',
+        '4px': '4px',
+        '400': '400px',
+        '90vw': '90vw',
+        'px120': '120px',
+        '220': '220px',
+        '685': '685px'
+      },
     }
   },
   plugins: [],

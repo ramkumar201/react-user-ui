@@ -13,6 +13,7 @@ import {
   ProfileUpdateService,
 } from "../Service/AuthService";
 import toast, { Toaster } from "react-hot-toast";
+import AuthLayout from "./layouts/AuthLayout";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -87,89 +88,91 @@ const Profile = () => {
 
   return (
     <>
-      <section className="sign-in">
-        <Toaster />
-        <div className="container">
-          <div className="profile-content">
-            <div className="p-2 md:p-4">
-              <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-                <h2 className="pl-6 text-2xl font-bold sm:text-xl mt-3">
-                  My profile
-                </h2>
-                <div className="mt-6 profile-img">
-                  <img
-                    className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
-                    src={formData.image}
-                    alt={user.firstName.toLowerCase() + "_img"}
-                  />
-                </div>
-                <h2 className="pl-6 text-2xl font-bold sm:text-xl mt-3">
-                  {userName}
-                </h2>
-                <div className="grid max-w-2xl mx-auto">
-                  <div className="items-center mt-8 text-[#202142]">
-                    <form onSubmit={handleSubmitForm}>
-                      <div className="flex flex-col w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+      <AuthLayout>
+        <section className="profile-section">
+          <Toaster />
+          <div className="container">
+            <div className="profile-content">
+              <div className="p-2 md:p-4">
+                <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                  <h2 className="pl-6 text-2xl font-bold sm:text-xl mt-3">
+                    My profile
+                  </h2>
+                  <div className="mt-6 profile-img">
+                    <img
+                      className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500"
+                      src={formData.image}
+                      alt={user.firstName.toLowerCase() + "_img"}
+                    />
+                  </div>
+                  <h2 className="pl-6 text-2xl font-bold sm:text-xl mt-3">
+                    {userName}
+                  </h2>
+                  <div className="grid max-w-2xl mx-auto">
+                    <div className="items-center mt-8 text-[#202142]">
+                      <form onSubmit={handleSubmitForm}>
+                        <div className="flex flex-col w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+                          <div className="form-group">
+                            <label htmlFor="firstName">
+                              <FaUser />
+                            </label>
+                            <Input
+                              type="text"
+                              name="firstName"
+                              id="firstName"
+                              placeholder="First Name *"
+                              value={formData.firstName}
+                              onChange={handleChange}
+                            />
+                          </div>
+
+                          <div className="form-group">
+                            <Input
+                              type="text"
+                              name="lastName"
+                              id="lastName"
+                              placeholder="Last Name *"
+                              value={formData.lastName}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        </div>
+
                         <div className="form-group">
-                          <label htmlFor="firstName">
-                            <FaUser />
+                          <label htmlFor="email">
+                            <IoMdMail />
                           </label>
                           <Input
                             type="text"
-                            name="firstName"
-                            id="firstName"
-                            placeholder="First Name *"
-                            value={formData.firstName}
+                            name="email"
+                            id="email"
+                            placeholder="Email *"
+                            value={formData.email}
                             onChange={handleChange}
                           />
                         </div>
 
-                        <div className="form-group">
-                          <Input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            placeholder="Last Name *"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="email">
-                          <IoMdMail />
-                        </label>
-                        <Input
-                          type="text"
-                          name="email"
-                          id="email"
-                          placeholder="Email *"
-                          value={formData.email}
-                          onChange={handleChange}
+                        <PhoneInput
+                          defaultCountry="IN"
+                          placeholder="Enter phone number"
+                          name="phone"
+                          id="phone"
+                          value={formData.phone}
+                          onChange={handleChangePhone}
                         />
-                      </div>
 
-                      <PhoneInput
-                        defaultCountry="IN"
-                        placeholder="Enter phone number"
-                        name="phone"
-                        id="phone"
-                        value={formData.phone}
-                        onChange={handleChangePhone}
-                      />
-
-                      <div className="flex justify-end">
-                        <Button name="Save" />
-                      </div>
-                    </form>
+                        <div className="flex justify-end">
+                          <Button name="Save" />
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AuthLayout>
     </>
   );
 };
