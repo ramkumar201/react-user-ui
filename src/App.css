@@ -87,3 +87,9 @@
     max-width: 1200px;
   }
 }
+
+/* Chart */
+.canvasjs-chart-credit,
+.canvasjs-chart-toolbar {
+  display: none;
+}

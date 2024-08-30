@@ -1,0 +1,25 @@
+.chart-container {
+    display: flex;
+}
+
+.chart-container>div {
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    flex-grow: 1;
+}
+
+
+
+/* 
+@media screen and (max-width: 1200px) {
+    .chart-container {
+        width: calc(100% - 30px);
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .home-container {
+        max-width: 1200px;
+    }
+} */
