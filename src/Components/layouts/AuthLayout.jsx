@@ -14,7 +14,7 @@ const AuthLayout = ({ children }) => {
       axios()
         .get("auth-status")
         .then((res) => {
-          if (res.status != 200) {
+          if (res.status !== 200) {
             logout();
             throw new Error("Not authenticated");
           }

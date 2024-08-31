@@ -19,3 +19,8 @@ export async function ProfileUpdateService(data) {
     const res = await axios().post('/updateprofile', data);
     return res;
 }
+
+export async function AuthGoogleLogin(data) {
+    const res = await axios().post("/auth/google", data);
+    return res;
+}

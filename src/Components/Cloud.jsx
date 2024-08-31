@@ -1,9 +1,11 @@
-import { FaAd, FaImages } from "react-icons/fa";
 import AuthLayout from "./layouts/AuthLayout";
 import "../css/cloud.css";
 import "../css/Home.css";
 
 const Cloud = () => {
+  const handleGoSection = (type) => {
+    // toast.warning("asd");
+  };
   return (
     <>
       <AuthLayout>
@@ -20,6 +22,8 @@ const Cloud = () => {
                       <img
                         className="cloud-img cursor-pointer"
                         src="./images/picture.png"
+                        alt="imagealt"
+                        onClick={() => handleGoSection("img")}
                       />
                       <span className="cursor-pointer">Image</span>
                     </div>
@@ -27,6 +31,8 @@ const Cloud = () => {
                       <img
                         className="cloud-img cursor-pointer"
                         src="./images/video.png"
+                        alt="videoalt"
+                        onClick={() => handleGoSection("video")}
                       />
                       <span className="cursor-pointer">Video</span>
                     </div>
@@ -34,6 +40,8 @@ const Cloud = () => {
                       <img
                         className="cloud-img cursor-pointer"
                         src="./images/headphone.png"
+                        alt="musicalt"
+                        onClick={() => handleGoSection("music")}
                       />
                       <span className="cursor-pointer">Music</span>
                     </div>
@@ -41,6 +49,8 @@ const Cloud = () => {
                       <img
                         className="cloud-img cursor-pointer"
                         src="./images/documentlist.png"
+                        alt="documentalt"
+                        onClick={() => handleGoSection("document")}
                       />
                       <span className="cursor-pointer">Document</span>
                     </div>

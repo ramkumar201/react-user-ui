@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { initializeApp } from "firebase/app";
 import FbConfig from '../src/Config/Firebase';
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // import { getAnalytics } from "firebase/analytics";
 
 initializeApp(FbConfig);
@@ -12,8 +13,10 @@ initializeApp(FbConfig);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-  {/* <React.StrictMode> */}
-    <App />
-  {/* </React.StrictMode> */}
+    {/* <React.StrictMode> */}
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_OAUTH_CLIENT_ID}>
+      <App />
+    </GoogleOAuthProvider>
+    {/* </React.StrictMode> */}
   </>
 );

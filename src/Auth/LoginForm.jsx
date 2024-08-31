@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import LoginLayout from "../Components/layouts/LoginLayout";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
-
 import { checkEmail } from "../helper/Validate";
-import { LoginService } from "../Service/AuthService";
-
+import { AuthGoogleLogin, LoginService } from "../Service/AuthService";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaUnlock, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "../css/Login.css";
 import { useAuth } from "../hook/useAuth";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -72,6 +72,30 @@ const LoginForm = () => {
       });
     }
   };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      const userInfo = await axios
+        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res) => res.data);
+
+      console.log(userInfo);
+      await AuthGoogleLogin(userInfo).then((res) => {
+        console.log("Login Return -- ", res.data);
+        if (!res.data.status) {
+          toast.error(res.response.data.message);
+        } else if (res.data.status) {
+          let value = res.data.data;
+          toast.success(res.data.message);
+          setTimeout(async () => {
+            await login(value);
+          }, 3000);
+        }
+      });
+    },
+  });
 
   return (
     <>
@@ -140,11 +164,11 @@ const LoginForm = () => {
             <span className="social-label">Or login with Google</span>
             <ul className="socials">
               <li>
-                <a href="#/">
+                <span className="cursor-pointer" onClick={() => googleLogin()}>
                   <i className="display-flex-center google-icon">
                     <FaGoogle />
                   </i>
-                </a>
+                </span>
               </li>
             </ul>
           </div>
