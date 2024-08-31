@@ -62,13 +62,19 @@ export default function Header() {
             {user && (
               <>
                 <Link
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  className="text-sm font-semibold leading-6 text-gray-900 header-link"
                   to="/"
                 >
                   Home
                 </Link>
                 <Link
-                  className="text-sm font-semibold leading-6 text-gray-900"
+                  className="text-sm font-semibold leading-6 text-gray-900 header-link"
+                  to="/cloud"
+                >
+                  Cloud
+                </Link>
+                <Link
+                  className="text-sm font-semibold leading-6 text-gray-900 header-link"
                   to="/profile"
                 >
                   Profile
@@ -82,7 +88,7 @@ export default function Header() {
               className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer"
               onClick={handleLog}
             >
-              {user ? "Log out" : "Log in"}{" "}
+              {user ? "Log out" : "Log in"}
               <span aria-hidden="true">&rarr;</span>
             </span>
           </div>
@@ -118,13 +124,19 @@ export default function Header() {
                   {user && (
                     <>
                       <Link
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 header-link"
                         to="/"
                       >
                         Home
                       </Link>
                       <Link
-                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 header-link"
+                        to="/cloud"
+                      >
+                        Cloud
+                      </Link>
+                      <Link
+                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 header-link"
                         to="/profile"
                       >
                         Profile
@@ -137,7 +149,7 @@ export default function Header() {
                     href="/login"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
+                    {user ? "Log out" : "Log in"}
                   </a>
                 </div>
               </div>

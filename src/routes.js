@@ -7,6 +7,7 @@ import { AuthProvider } from './hook/useAuth';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Profile from './Components/Profile';
 import Home from './Components/Home';
+import Cloud from "./Components/Cloud";
 
 export const routes = () => {
     const route = createBrowserRouter([
@@ -29,6 +30,10 @@ export const routes = () => {
         {
             path: '/profile',
             element: <AuthProvider><ProtectedRoute><Profile /></ProtectedRoute></AuthProvider>
+        },
+        {
+            path: '/cloud',
+            element: <AuthProvider><ProtectedRoute><Cloud /></ProtectedRoute></AuthProvider>
         },
         {
             path: '*',

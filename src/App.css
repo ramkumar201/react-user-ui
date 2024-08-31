@@ -75,6 +75,15 @@
   -ms-border-radius: 20px;
 }
 
+.content-title {
+  margin: 20px;
+}
+
+.header-link:hover {
+  border-bottom: 2px solid #4F45E4;
+}
+
+
 @media screen and (max-width: 1200px) {
   .home-container {
     width: calc(100% - 30px);
