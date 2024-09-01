@@ -83,6 +83,10 @@
   border-bottom: 2px solid #4F45E4;
 }
 
+.react-confirm-alert-body h1 {
+  font-weight: 800;
+}
+
 
 @media screen and (max-width: 1200px) {
   .home-container {

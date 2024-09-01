@@ -12,8 +12,9 @@ import {
   GetProfileUserService,
   ProfileUpdateService,
 } from "../Service/AuthService";
-import toast, { Toaster } from "react-hot-toast";
 import AuthLayout from "./layouts/AuthLayout";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -36,7 +37,7 @@ const Profile = () => {
       console.log(" -- GetUserInfo --", res);
       if (res.status === 200) {
         let data = res.data;
-        setUserName(`${data.firstName} ${data.lastName}`);
+        setUserName(`${data.firstName} ${data.lastName ?? ""}`);
         setFormData({
           _id: data._id,
           firstName: data.firstName,
@@ -76,11 +77,29 @@ const Profile = () => {
     await ProfileUpdateService(formData).then(async (res) => {
       console.log("Update Profile Res -- ", res);
       if (res.code === "ERR_BAD_REQUEST") {
-        toast.error(res.response.data.message);
+        toast.error(res.response.data.message, {
+          position: "top-center",
+          autoClose: 2000,
+          draggable: true,
+          theme: "colored",
+          transition: Bounce,
+        });
       } else if (res.code === "ERR_NETWORK") {
-        toast.error(res.message);
+        toast.error(res.message, {
+          position: "top-center",
+          autoClose: 2000,
+          draggable: true,
+          theme: "colored",
+          transition: Bounce,
+        });
       } else if (res.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message, {
+          position: "top-center",
+          autoClose: 2000,
+          draggable: true,
+          theme: "colored",
+          transition: Bounce,
+        });
         await GetUserInfo();
       }
     });
@@ -90,7 +109,6 @@ const Profile = () => {
     <>
       <AuthLayout>
         <section className="profile-section">
-          <Toaster />
           <div className="container">
             <div className="profile-content">
               <div className="p-2 md:p-4">

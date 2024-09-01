@@ -1,12 +1,10 @@
 import { IoMdMail } from "react-icons/io";
 import Button from "../Components/Button";
 import LoginLayout from "../Components/layouts/LoginLayout";
-import { Toaster } from "react-hot-toast";
 
 const ForgotPassword = () => {
   return (
     <>
-      <Toaster />
       <LoginLayout
         goToPage="Don't have an account? "
         goToPageShort="Signup"

@@ -4,7 +4,6 @@ import Input from "../Components/Input";
 import Button from "../Components/Button";
 import { checkEmail } from "../helper/Validate";
 import { AuthGoogleLogin, LoginService } from "../Service/AuthService";
-import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { FaUser, FaUnlock, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -12,6 +11,8 @@ import "../css/Login.css";
 import { useAuth } from "../hook/useAuth";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -61,10 +62,22 @@ const LoginForm = () => {
       await LoginService(formData).then((res) => {
         console.log("Login Return -- ", res);
         if (res.code === "ERR_BAD_REQUEST") {
-          toast.error(res.response.data.message);
+          toast.error(res.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
         } else if (res.status) {
           let value = res.data.data;
-          toast.success(res.data.message);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
           setTimeout(async () => {
             await login(value);
           }, 3000);
@@ -85,10 +98,22 @@ const LoginForm = () => {
       await AuthGoogleLogin(userInfo).then((res) => {
         console.log("Login Return -- ", res.data);
         if (!res.data.status) {
-          toast.error(res.response.data.message);
+          toast.error(res.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
         } else if (res.data.status) {
           let value = res.data.data;
-          toast.success(res.data.message);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
           setTimeout(async () => {
             await login(value);
           }, 3000);
@@ -99,7 +124,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <Toaster />
       <LoginLayout
         goToPage="Don't have an account? "
         goToPageShort="Signup"

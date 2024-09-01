@@ -4,12 +4,13 @@ import { FaUser, FaUnlock, FaGoogle } from "react-icons/fa";
 import { checkEmail } from "../helper/Validate";
 import { RegisterService } from "../Service/AuthService";
 import Input from "../Components/Input";
-import toast, { Toaster } from "react-hot-toast";
 import Button from "../Components/Button";
 import LoginLayout from "../Components/layouts/LoginLayout";
 import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hook/useAuth";
+import { Bounce, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -77,9 +78,21 @@ const RegisterForm = () => {
       await RegisterService(formData).then((res) => {
         console.log(res.response);
         if (res.code === "ERR_BAD_REQUEST") {
-          toast.error(res.response.data.message);
+          toast.error(res.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
         } else if (res.status) {
-          toast.success(res.data.message);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            draggable: true,
+            theme: "colored",
+            transition: Bounce,
+          });
           setTimeout(() => {
             navigate("/login");
           }, 2000);
@@ -90,7 +103,6 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Toaster />
       <LoginLayout
         goToPage="Already have an account? "
         goToPageShort="Signin"

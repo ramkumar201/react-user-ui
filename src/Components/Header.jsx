@@ -19,7 +19,7 @@ export default function Header() {
     } else {
       confirmAlert({
         title: "Confirm",
-        message: "Are you sure want to Logout ?",
+        message: "Are you sure want to Logout?",
         buttons: [
           {
             label: "Yes",
@@ -29,6 +29,7 @@ export default function Header() {
             label: "No",
           },
         ],
+        overlayClassName: "logout-popup",
       });
     }
   };
